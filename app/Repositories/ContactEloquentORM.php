@@ -42,8 +42,18 @@ class ContactEloquentORM implements ContactRepositoryInterface {
     */
 
     public function create(CreateContactDTO $dto): stdClass {
-        $support = $this->model->create((array) $dto);
+        $contact = $this->model->create([
+            'name' => $dto->name,
+            'email' => $dto->email,
+            'cpf' => $dto->cpf,
+            'dob' => $dto->dob
+        ]);
 
-        return (object) $support->toArray();
+        foreach($dto->phone_number as $phoneNumber){
+            $contact->phones()->create(['phone_number' => $phoneNumber]);
+        }
+
+        return (object) $contact->toArray();
+
     }
 }

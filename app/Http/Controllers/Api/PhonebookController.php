@@ -8,6 +8,7 @@ use App\Http\Requests\StoreUpdateContact;
 use App\Models\Contact;
 use App\Services\ContactService;
 use Illuminate\Http\Request;
+use App\Http\Resources\ContactResource;
 
 class PhonebookController extends Controller
 {
@@ -27,7 +28,9 @@ class PhonebookController extends Controller
             CreateContactDTO::makeFromRequest($request)
         );
 
-        return $contact;
+       $contact = Contact::with('phones')->find($contact->id);
+
+        return new ContactResource($contact);
     }
 
     /**

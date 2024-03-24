@@ -24,14 +24,6 @@ class ContactService
     public function create(CreateContactDTO $dto): stdClass{
         $contact = $this->repository->create($dto);
 
-        // Criação dos números de telefone associados ao contato
-        foreach ($dto->phone_number as $phoneNumber) {
-            Phone::create([
-                'contact_id' => $contact->id,
-                'phone_number' => $phoneNumber,
-            ]);
-        }
-
         return $contact;
     }
 
