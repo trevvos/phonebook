@@ -44,6 +44,24 @@ class StoreUpdateContact extends FormRequest
                 ]
             ];
 
+            if($this->method() === 'PUT' || $this->method() === 'PATCH'){
+                $rules = [
+                    'name' => [
+                        'min:3',
+                        'max:255'
+                    ],
+                    'cpf' => [
+                        'max:11'
+                    ],
+                    'email' => [
+                        'email'
+                    ],
+                    'phone_number' => [
+                        'required'
+                    ]
+                ];
+            }
+
             return $rules;
     }
 }

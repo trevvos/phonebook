@@ -31,13 +31,24 @@ class ContactEloquentORM implements ContactRepositoryInterface {
     }
 
     public function update(UpdateContactDTO $dto): stdClass|null {
-        if(!$support = $this->model->find($dto->id)){
+        if(!$contact = $this->model->find($dto->id)){
             return null;
         }
 
-        $support->update((array) $dto);
+        $contact->update([
+            'name' => $dto->name,
+            'email' => $dto->email,
+            'cpf' => $dto->cpf,
+            'dob' => $dto->dob
+        ]);
 
-        return (object) $support->toArray();
+        $contact->phones()->delete();
+
+        foreach($dto->phone_number as $phoneNumber){
+            $contact->phones()->create(['phone_number' => $phoneNumber]);
+        }
+
+        return (object) $contact->toArray();
     }
     
 

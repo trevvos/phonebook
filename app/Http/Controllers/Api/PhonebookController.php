@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\DTO\CreateContactDTO;
+use App\DTO\UpdateContactDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateContact;
 use App\Models\Contact;
@@ -47,12 +48,22 @@ class PhonebookController extends Controller
         return new ContactResource($contact);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+ 
+    public function update(StoreUpdateContact $request, string $id)
     {
-        //
+        $contact = $this->service->update(
+            UpdateContactDTO::makeFromRequest($request, $id)
+        );
+
+        if(!$contact){
+            return response()->json([
+                'error' => 'Not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $contact = Contact::with('phones')->find($contact->id);
+
+        return new ContactResource($contact);
     }
 
     public function destroy(string $id)

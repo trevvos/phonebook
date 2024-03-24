@@ -14,9 +14,9 @@ class UpdateContactDTO {
         public array $phone_number
     ){}
 
-    public static function makeFromRequest(StoreUpdateContact $request): self{
+    public static function makeFromRequest(StoreUpdateContact $request, string $id = null ): self{
         return new self(
-            $request->id,
+            $id ?? $request->id,
             $request->name,
             $request->email,
             $request->cpf,
