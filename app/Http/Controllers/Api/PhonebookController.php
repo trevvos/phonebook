@@ -19,9 +19,9 @@ class PhonebookController extends Controller
 
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::paginate();
 
-        dd($contacts);
+        return ContactResource::collection($contacts);
     }
 
     public function store(StoreUpdateContact $request)
