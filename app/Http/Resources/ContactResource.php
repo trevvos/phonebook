@@ -18,7 +18,7 @@ class ContactResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'cpf' => $this->cpf,
-            'dob' => $this->dob,
+            'birthday' => $this->dob,
             'phone_numbers' => $this->phones->pluck('phone_number')
         ];
     }

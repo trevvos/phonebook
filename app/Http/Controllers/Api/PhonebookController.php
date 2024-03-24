@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Services\ContactService;
 use Illuminate\Http\Request;
 use App\Http\Resources\ContactResource;
+use Illuminate\Http\Response;
 
 class PhonebookController extends Controller
 {
@@ -33,12 +34,17 @@ class PhonebookController extends Controller
         return new ContactResource($contact);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        if(!$contact = $this->service->findOne($id)){
+            return response()->json([
+                'error' => 'Not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $contact = Contact::with('phones')->find($contact->id);
+
+        return new ContactResource($contact);
     }
 
     /**
