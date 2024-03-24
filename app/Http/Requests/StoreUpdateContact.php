@@ -30,8 +30,18 @@ class StoreUpdateContact extends FormRequest
                 ],
                 'email' => [
                     'required',
-                    'email'
+                    'email',
+                    'unique:contacts'
                 ],
+                'cpf' => [
+                    'required',
+                    'unique:contacts',
+                    'max:11'
+                ],
+                'phone_number' => [
+                    'required',
+                    'unique:phones'
+                ]
             ];
 
             return $rules;

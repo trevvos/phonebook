@@ -25,7 +25,7 @@ class ContactService
         $contact = $this->repository->create($dto);
 
         // Criação dos números de telefone associados ao contato
-        foreach ($dto->phones as $phoneNumber) {
+        foreach ($dto->phone_number as $phoneNumber) {
             Phone::create([
                 'contact_id' => $contact->id,
                 'phone_number' => $phoneNumber,

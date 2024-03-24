@@ -11,7 +11,7 @@ class CreateContactDTO {
         public string $email,
         public string $cpf,
         public string $dob,
-        public array $phones = []
+        public array $phone_number
     ){}
     
     public static function makeFromRequest(StoreUpdateContact $request): self{
@@ -20,7 +20,7 @@ class CreateContactDTO {
             $request->email,
             $request->cpf,
             $request->dob,
-            $request->phones // Apenas atribui os telefones diretamente
+            $request->phone_number // Apenas atribui os telefones diretamente
         );
     }
     }
