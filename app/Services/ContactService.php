@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\DTO\CreateContactDTO;
+use App\DTO\{CreateContactDTO, UpdateContactDTO};
 use App\Repositories\ContactRepositoryInterface;
-use App\Models\Phone;
+
 use stdClass;
 
 class ContactService 
@@ -27,10 +27,10 @@ class ContactService
         return $contact;
     }
 
-    /*public function update(UpdateContactDTO $dto): stdClass|null {
+    public function update(UpdateContactDTO $dto): stdClass|null {
         return $this->repository->update($dto);
     }
-    */
+    
 
     public function delete(string $id): void {
         $this->repository->delete($id);

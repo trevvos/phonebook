@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\ContactRepositoryInterface;
-use App\DTO\CreateContactDTO;
+use App\DTO\{CreateContactDTO, UpdateContactDTO};
 use App\Models\Contact;
 
 use stdClass;
@@ -30,7 +30,7 @@ class ContactEloquentORM implements ContactRepositoryInterface {
         $this->model->findOrFail($id)->delete();
     }
 
-    /*public function update(UpdateContactDTO $dto): stdClass|null {
+    public function update(UpdateContactDTO $dto): stdClass|null {
         if(!$support = $this->model->find($dto->id)){
             return null;
         }
@@ -39,7 +39,7 @@ class ContactEloquentORM implements ContactRepositoryInterface {
 
         return (object) $support->toArray();
     }
-    */
+    
 
     public function create(CreateContactDTO $dto): stdClass {
         $contact = $this->model->create([

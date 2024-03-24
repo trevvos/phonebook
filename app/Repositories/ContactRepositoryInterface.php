@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\DTO\CreateContactDTO;
+use App\DTO\{CreateContactDTO, UpdateContactDTO};
 use stdClass;
 
 interface ContactRepositoryInterface {
@@ -11,6 +11,6 @@ interface ContactRepositoryInterface {
     public function findOne(string $id): stdClass|null;
     public function delete(string $id): void;
     public function create(CreateContactDTO $dto): stdClass;
-    //public function update(UpdateContactDTO $dto): stdClass|null;
+    public function update(UpdateContactDTO $dto): stdClass|null;
 
 }
