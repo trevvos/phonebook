@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateContact;
 use App\Models\Contact;
 use App\Services\ContactService;
-use Illuminate\Http\Request;
 use App\Http\Resources\ContactResource;
 use Illuminate\Http\Response;
 
@@ -16,6 +15,15 @@ class PhonebookController extends Controller
 {
 
     public function __construct(protected ContactService $service){}
+
+    public function report()
+    {
+        $contacts = $this->service->getAll();
+
+        $contactNames = array_column($contacts, 'name');
+
+        return response()->json($contactNames);
+    }
 
     public function index()
     {
