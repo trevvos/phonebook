@@ -1,5 +1,10 @@
 # Phonebook (Agenda Telefonica)
 
+### Documentação Swagger
+
+Acesse:
+[http://localhost:9090/api/documentation](http://localhost:9090/api/documentation)
+
 ### Passo a passo
 
 Clone Repositório
@@ -9,7 +14,7 @@ git clone -b laravel-10-com-php-8.1 https://github.com/trevvos/phonebook phonebo
 ```
 
 ```sh
-cd app-laravel
+cd phonebook
 ```
 
 Crie o Arquivo .env
@@ -31,13 +36,6 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=root
 
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
 ```
 
 Suba os containers do projeto
