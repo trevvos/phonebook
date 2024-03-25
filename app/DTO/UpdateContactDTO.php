@@ -2,6 +2,21 @@
 namespace App\DTO;
 
 use App\Http\Requests\StoreUpdateContact;
+use OpenApi\Annotations as OA;
+
+/**
+ * @OA\Schema(
+ *     schema="StoreUpdateContactDTO",
+ *     title="Store Update Contact DTO",
+ *     description="Schema for the Store Update Contact DTO",
+ *     @OA\Property(property="id", type="string", description="ID of the contact"),
+ *     @OA\Property(property="name", type="string", description="Name of the contact"),
+ *     @OA\Property(property="email", type="string", format="email", description="Email of the contact"),
+ *     @OA\Property(property="cpf", type="string", description="CPF of the contact"),
+ *     @OA\Property(property="dob", type="string", format="date", description="Date of birth of the contact"),
+ *     @OA\Property(property="phone_number", type="array", @OA\Items(type="string", description="Phone numbers of the contact"))
+ * )
+ */
 
 class UpdateContactDTO {
 

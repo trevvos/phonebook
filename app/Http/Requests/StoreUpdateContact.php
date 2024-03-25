@@ -4,6 +4,22 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use OpenApi\Annotations as OA;
+
+/**
+ * @OA\Schema(
+ *     schema="StoreUpdateContact",
+ *     title="Store Update Contact DTO",
+ *     description="DTO for updating a contact",
+ *     required={"name", "email", "cpf", "dob", "phone_number"},
+ *     @OA\Property(property="name", type="string", description="Name of the contact"),
+ *     @OA\Property(property="email", type="string", format="email", description="Email of the contact"),
+ *     @OA\Property(property="cpf", type="string", description="CPF of the contact"),
+ *     @OA\Property(property="dob", type="string", format="date", description="Date of birth of the contact"),
+ *     @OA\Property(property="phone_number", type="array", @OA\Items(type="string", description="Phone numbers of the contact"))
+ * )
+ */
+
 class StoreUpdateContact extends FormRequest
 {
     /**

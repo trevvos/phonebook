@@ -1,0 +1,322 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Contatos",
+        "description": "Documentação da API de Contatos",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Get all contacts",
+                "description": "Display a listing of the resource.",
+                "operationId": "1e79792ec883ae15911d8a1c6dd825b2",
+                "responses": {
+                    "200": {
+                        "description": "List of contacts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ContactResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Create a new contact",
+                "description": "Store a newly created resource in storage.",
+                "operationId": "e27e9db9cf5b855a531644ad04f4dc91",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateContactDTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Contact created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/contacts/{id}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Get a contact by ID",
+                "description": "Display the specified resource.",
+                "operationId": "e8039272a72aa114a56aa3d920746210",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the contact",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contact details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Contact not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Update a contact by ID",
+                "description": "Update the specified resource in storage.",
+                "operationId": "dd12db8303a4d9a285bbaa7d92e438cc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the contact",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUpdateContact"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Contact updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ContactResource"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Contact not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Delete a contact",
+                "description": "Remove the specified resource from storage.",
+                "operationId": "cf025f99b67da9e2ccbf0099aef72926",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the contact",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Contact deleted successfully"
+                    },
+                    "404": {
+                        "description": "Contact not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateContactDTO": {
+                "title": "Create Contact DTO",
+                "description": "Schema for the Create Contact DTO",
+                "properties": {
+                    "name": {
+                        "description": "Name of the contact",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the contact",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "cpf": {
+                        "description": "CPF of the contact",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "Date of birth of the contact",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "phone_number": {
+                        "type": "array",
+                        "items": {
+                            "description": "Phone numbers of the contact",
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreUpdateContactDTO": {
+                "title": "Store Update Contact DTO",
+                "description": "Schema for the Store Update Contact DTO",
+                "properties": {
+                    "id": {
+                        "description": "ID of the contact",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Name of the contact",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the contact",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "cpf": {
+                        "description": "CPF of the contact",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "Date of birth of the contact",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "phone_number": {
+                        "type": "array",
+                        "items": {
+                            "description": "Phone numbers of the contact",
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "StoreUpdateContact": {
+                "title": "Store Update Contact DTO",
+                "description": "DTO for updating a contact",
+                "required": [
+                    "name",
+                    "email",
+                    "cpf",
+                    "dob",
+                    "phone_number"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Name of the contact",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the contact",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "cpf": {
+                        "description": "CPF of the contact",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "Date of birth of the contact",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "phone_number": {
+                        "type": "array",
+                        "items": {
+                            "description": "Phone numbers of the contact",
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "ContactResource": {
+                "title": "Contact Resource",
+                "description": "Schema for the Contact resource",
+                "properties": {
+                    "id": {
+                        "description": "ID of the contact",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Name of the contact",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email of the contact",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "cpf": {
+                        "description": "CPF of the contact",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "Date of birth of the contact",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "phone_numbers": {
+                        "type": "array",
+                        "items": {
+                            "description": "Phone numbers of the contact",
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
